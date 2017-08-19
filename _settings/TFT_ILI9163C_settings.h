@@ -4,11 +4,12 @@
 
 //DID YOU HAVE A RED PCB, BLACk PCB or WHAT DISPLAY TYPE???????????? 
 //  ---> SELECT HERE <----
-#define __144_RED_PCB__//128x128
+//#define __144_NETTIGO__
+#define __18_NETTIGO__
+//#define __144_RED_PCB__//128x128
 //#define __144_BLACK_PCB__//128x128
 //#define __22_RED_PCB__//240x320
 //---------------------------------------
-
 
 #if defined(__144_RED_PCB__)
 /*
@@ -30,6 +31,26 @@ you can copy those parameters and create setup for different displays.
 	#define __GAMMASET3		//uncomment for another gamma
 	#define __OFFSET		32//*see note 2
 	//Tested!
+#elif defined(__144_NETTIGO__)
+	#define _TFTWIDTH  		128//the REAL W resolution of the TFT
+	#define _TFTHEIGHT 		128//the REAL H resolution of the TFT
+	#define _GRAMWIDTH      128
+	#define _GRAMHEIGH      128//160
+	#define _GRAMSIZE		_GRAMWIDTH * _GRAMHEIGH//*see note 1
+	#define __COLORSPC		1// 1:GBR - 0:RGB
+	#define __GAMMASET3		//uncomment for another gamma
+	#define __OFFSET		0//*see note 2
+
+#elif defined(__18_NETTIGO__)
+	#define _TFTWIDTH  		128//the REAL W resolution of the TFT
+	#define _TFTHEIGHT 		160//the REAL H resolution of the TFT
+	#define _GRAMWIDTH      128
+	#define _GRAMHEIGH      160//160
+	#define _GRAMSIZE		_GRAMWIDTH * _GRAMHEIGH//*see note 1
+	#define __COLORSPC		1// 1:GBR - 0:RGB
+	#define __GAMMASET3		//uncomment for another gamma
+	#define __OFFSET		0//*see note 2
+
 #elif defined (__144_BLACK_PCB__)
 	#define _TFTWIDTH  		128//the REAL W resolution of the TFT
 	#define _TFTHEIGHT 		128//the REAL H resolution of the TFT
@@ -54,6 +75,7 @@ Not tested!
 	#define __COLORSPC		1// 1:GBR - 0:RGB
 	#define __GAMMASET1		//uncomment for another gamma
 	#define __OFFSET		0
+/*
 #else
 	#define _TFTWIDTH  		128//128
 	#define _TFTHEIGHT 		160//160
@@ -63,6 +85,7 @@ Not tested!
 	#define __COLORSPC		1// 1:GBR - 0:RGB
 	#define __GAMMASET1
 	#define __OFFSET		0
+*/
 #endif
 
 	#if defined(__GAMMASET1)
