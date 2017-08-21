@@ -3,7 +3,7 @@
 #include "pins_arduino.h"
 #include "wiring_private.h"
 #include <SPI.h>
-
+#include <avr/pgmspace.h>
 #if defined(SPI_HAS_TRANSACTION)
 	static SPISettings ILI9163C_SPI;
 #endif
@@ -831,28 +831,25 @@ void TFT_ILI9163C::drawRGBBitmap(int16_t x, int16_t y,  uint16_t PROGMEM * const
 {
 	uint16_t color;
 	uint16_t px;
-	uint16_t tx, ty;
+	uint16_t limit;
 
-	px = 0;
+	limit = h * w;
 #if defined(__MK20DX128__) || defined(__MK20DX256__)
 	writecommand_cont(CMD_RAMWR);
 #else
 	writecommand(CMD_RAMWR);
 #endif
-	setAddrWindow(x, y, x + w, y + h);
-	for (tx = 0; tx < w; tx++)
+	setAddrWindow(x, y, x + w - 1, y + h - 1);
+	for (px = 0; px < limit; px++)
 	{
-
-		for (ty = 0; ty < h; ty++)
-		{ //16384
-			color = Color24To565(bitmap[px++]);
-			// color = bitmap[px++];
-			#if defined(__MK20DX128__) || defined(__MK20DX256__)
-			writedata16_cont(color);
+		// color = Color24To565(bitmap[px++]);
+		color = pgm_read_word(bitmap + px);
+// color = Color24To565(color);
+#if defined(__MK20DX128__) || defined(__MK20DX256__)
+		writedata16_cont(color);
 #else
-			writedata16(color);
+		writedata16(color);
 #endif
-		}
 	}
 #if defined(__MK20DX128__) || defined(__MK20DX256__)
 	_setAddrWindow(0x00, 0x00, _GRAMWIDTH, _GRAMHEIGH); //home
