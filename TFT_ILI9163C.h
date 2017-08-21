@@ -397,6 +397,26 @@ class TFT_ILI9163C : public Adafruit_GFX {
 			_setAddrWindow(x, y, x, y);
 			writedata16_cont(color);
 		}
+
+		// Draw image from Flash memory
+		void Image(const uint16_t x, const uint16_t y,
+			const uint16_t width, const uint16_t height, 
+			const uint16_t PROGMEM * const imageData) 
+			__attribute__((always_inline)) {
+
+				const uint16_t xEnd = x + width;
+				const uint16_t yEnd = y + height;
+
+				_setAddrWindow(x, y, xEnd, yEnd);
+
+				const uint16_t dataSize = width * height;
+				for (uint16_t i=0; i<dataSize; i++)
+				{
+					const uint16_t color = pgm_read_word(imageData+i);
+					writedata16_cont(color);
+				}
+			}
+
 	#else
 		uint8_t 			_cs,_rs,_rst;	
 	#endif
