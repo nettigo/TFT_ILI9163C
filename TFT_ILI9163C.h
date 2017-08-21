@@ -175,6 +175,11 @@ class TFT_ILI9163C : public Adafruit_GFX {
 	void 		pushData(uint16_t color);
 	void 		endPushData();
 	void		writeScreen24(const uint32_t *bitmap,uint16_t size=_TFTWIDTH*_TFTHEIGHT);
+	void		drawRGBBitmap(int16_t x, int16_t y, uint16_t	 PROGMEM *const bitmap,int16_t w, int16_t h);
+	void Image(const uint16_t x, const uint16_t y,
+									 const uint16_t width, const uint16_t height,
+								 const uint16_t PROGMEM *const imageData);
+		
 	inline uint16_t Color565(uint8_t r, uint8_t g, uint8_t b) {return ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3);};
   //convert 24bit color into packet 16 bit one (credits for this are all mine)
 	inline uint16_t Color24To565(int32_t color_) { return ((((color_ >> 16) & 0xFF) / 8) << 11) | ((((color_ >> 8) & 0xFF) / 4) << 5) | (((color_) &  0xFF) / 8);}
