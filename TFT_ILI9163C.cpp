@@ -839,14 +839,15 @@ void TFT_ILI9163C::drawRGBBitmap(int16_t x, int16_t y,  uint16_t PROGMEM * const
 #else
 	writecommand(CMD_RAMWR);
 #endif
+	setAddrWindow(x, y, x + w, y + h);
 	for (tx = 0; tx < w; tx++)
 	{
-		setAddrWindow(x, y, x + w, y + h);
 
 		for (ty = 0; ty < h; ty++)
 		{ //16384
 			color = Color24To565(bitmap[px++]);
-#if defined(__MK20DX128__) || defined(__MK20DX256__)
+			// color = bitmap[px++];
+			#if defined(__MK20DX128__) || defined(__MK20DX256__)
 			writedata16_cont(color);
 #else
 			writedata16(color);
