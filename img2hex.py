@@ -34,6 +34,7 @@ args = parser.parse_args()
 
 def process(f):
     im = Image.open(f)
+    im = im.convert('RGBA')
 
     rgb565_values = []
     for (r, g, b, a) in im.getdata():
