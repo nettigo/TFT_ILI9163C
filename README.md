@@ -1,6 +1,17 @@
-TFT_ILI9163C
+# TFT_ILI9163C
 
 A fast SPI driver for TFT that use Ilitek ILI9163C driver for Arduino's Teensy's and more...
+
+At [Nettigo](https://nettigo.pl) we have TFT displays with ILI9163C. Since library does not support our modules out-of-box we have forked it and added support.
+
+Original library: https://github.com/sumotoy/TFT_ILI9163C
+
+Changes made by us:
+
+* added drawRGBBitamp support (tested on Arduino only)
+* support for our LCDs 1.44 an 1.88 (`__144_NETTIGO__` and `__18_NETTIGO__`)
+* image to .h converter written in python
+
 
 Current release: 0.9 (old! see below!)
 
