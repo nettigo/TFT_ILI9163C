@@ -1,3 +1,7 @@
+
+# image convert utilty, takes filename(s) as arguments and creates .h files
+# with 24 bit hex values.
+
 from PIL import Image
 import os,re
 import argparse
@@ -48,8 +52,8 @@ def process(f):
 
     rgb565_hex_text = ', '.join(['0x{0:04x}'.format(rgb565) for rgb565 in rgb565_values])
 
-    out = open(os.path.splitext(f.name)[0]+'.h', 'w')
     var = re.sub(r'[\-\. :]','_', os.path.basename(os.path.splitext(f.name)[0]))
+    out = open(var+'.h', 'w')
     source_result = code_template.format(name=var, width=im.width, height=im.height, data=rgb565_hex_text,file=f.name,size=im.size)
 #    out.write("# HEX for file: "+f.name+", size: "
 #    out.write("const unsigned int PROGMEM "+var+'[] = {\n')
