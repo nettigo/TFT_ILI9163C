@@ -807,25 +807,6 @@ void TFT_ILI9163C::writeScreen24(const uint32_t *bitmap,uint16_t size) {
 	#endif
 }
 
-void TFT_ILI9163C::Image(const uint16_t x, const uint16_t y,
-						 const uint16_t width, const uint16_t height,
-						 const uint16_t PROGMEM * const imageData)
-
-{
-
-	const uint16_t xEnd = x + width;
-
-	const uint16_t yEnd = y + height;
-
-	setAddrWindow(x, y, xEnd, yEnd);
-
-	{
-
-		const uint16_t color = pgm_read_word(imageData);
-
-			writedata16(color);
-	}
-}
 
 void TFT_ILI9163C::drawRGBBitmap(int16_t x, int16_t y,  uint16_t PROGMEM * const bitmap, int16_t w, int16_t h)
 {
